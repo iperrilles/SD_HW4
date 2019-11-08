@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, redirect
+from flask import render_template, redirect,request, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
@@ -44,6 +44,18 @@ def add_Landmark():
         return redirect ('/')
 
     return render_template('add_Landmark.html', form=form, pageTitle='Add new Landmark')
+
+@app.route('/delete_landmark/<int:LandmarkID>', methods=['GET','POST'])
+def delete_landmark(LandmarkID):
+    if request.method == 'POST': 
+        LM_obj = iperrilles_landmarksapp.query.filter_by(LandmarkID=LandmarkID).first()
+        db.session.delete(LM_obj)
+        db.session.commit()
+        flash('Landmark was successfully deleted!')
+        return redirect("/")
+
+    else: 
+        return redirect("/")
 
 if __name__ == '__main__':
     app.run(debug=True)

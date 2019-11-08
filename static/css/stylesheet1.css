@@ -43,3 +43,13 @@ input{
   display: inline-block;
   font-size: 16px;
 }
+
+.btn .btn-danger{
+	background-color: lightgray;
+	color: black;
+}
+
+.btn .btn-danger:hover{
+	background-color: teal;
+	color: white;
+}
