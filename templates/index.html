@@ -1,6 +1,28 @@
 
 {% extends 'base.html' %}
 {% block body %}
-Hello World!
+<p><a href="{{ url_for('add_Landmark')}}">Add Landmark</a></p>
+{% if landmarks %}
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Landmark</th>
+          <th>City</th>
+          <th>Country</th>
+        </tr>
+      </thead>
 
+      <tbody>
+        {% for row in landmarks %}
+        <tr>
+          <td> {{ row.LandmarkID }}</td>
+          <td> {{ row.LandmarkName }}</td>
+          <td> {{ row.City }}</td>
+          <td> {{ row.Country}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endif %}
 {% endblock %}

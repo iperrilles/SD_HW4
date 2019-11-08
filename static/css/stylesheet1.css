@@ -1,5 +1,5 @@
 body{
-	background-color: rgb(53, 57, 94);
+	background-color: cyan
 }
 
 h1 {
@@ -15,7 +15,7 @@ input{
 
 /* left justified on a centered div */
 .wrapper{
-	background-color: cyan;
+	background-color: white;
 	width: 95%; /*set the width you want for th div */
 	margin: 0 auto; /* centers the div on the page */
 	text-align: left; /*left justifies the text in the div */
