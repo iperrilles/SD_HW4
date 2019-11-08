@@ -1,0 +1,45 @@
+body{
+	background-color: rgb(53, 57, 94);
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 50px;
+	padding-left: 20px;
+	color: white;
+}
+
+input{
+	padding:10px;
+}
+
+/* left justified on a centered div */
+.wrapper{
+	background-color: cyan;
+	width: 95%; /*set the width you want for th div */
+	margin: 0 auto; /* centers the div on the page */
+	text-align: left; /*left justifies the text in the div */
+	border: 1px solid black; /*put a border around the box */
+	padding: 20px;
+}
+
+/* content div */
+.data{
+	float:left;
+	width: 97%; /*set the width you want for the div */
+	margin: 0 auto; /* centers the div on the page */
+	text-align: left; /*left justifies the text in the div */
+	padding: 20px;
+	border: 1px solid blue;
+}
+
+.button {
+  background-color: rgb(76, 116, 175); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
