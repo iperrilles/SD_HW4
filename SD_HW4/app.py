@@ -1,12 +1,13 @@
 from flask import Flask
-from flask import render_template, redirect,request, flash
+from flask import render_template, redirect, request, flash, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
 import pymysql
-#import secrets
-import os
+import secrets
+#import os
 
 dbuser = os.environ.get('DBUSER')
 dbpass = os.environ.get('DBPASS')
@@ -14,6 +15,7 @@ dbhost = os.environ.get('DBHOST')
 dbname = os.environ.get('DBNAME')
 
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(dbuser, dbpass, dbhost, dbname)
+#conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(secrets.dbuser, secrets.dbpass, secrets.dbhost, secrets.dbname)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SuperSecretKey'
@@ -34,6 +36,17 @@ class LandmarksForm(FlaskForm):
     City = StringField('City:', validators=[DataRequired()])
     Country = StringField('Country:', validators=[DataRequired()])
 
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        form = request.form
+        search_value = form['search_string']
+        search = "%{}%".format(search_value)
+        results = iperrilles_landmarksapp.query.filter(or_(iperrilles_landmarksapp.Landmark_Name.like(search), iperrilles_landmarksapp.City.like(search), iperrilles_landmarksapp.Country.like(search)).all()
+        return render_template('index.html', landmarks=results,pageTitle="Landmarks", legend="Search Results")
+    else:
+        return redirect('/')
 
 @app.route('/')
 def index():
@@ -68,6 +81,7 @@ def get_landmark(LandmarkID):
     if request.method == 'POST': 
         LM_obj = iperrilles_landmarksapp.query.get_or_404(LandmarkID)
         return render_template('landmark.html', form=landmark, pageTitle='Landmark Details')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

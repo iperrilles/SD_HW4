@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
-<div>
-    <h3><a href="{{ url_for('index')}}">Home</a></h3>
+        <h2>{{ legend }}</h2>
 
+    <h3><a href="{{ url_for('index')}}">Home</a></h3>
+<div>
     {% if form % }
     <form method="POST" action="">
 
