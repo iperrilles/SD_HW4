@@ -1,33 +1,19 @@
 from flask import Flask
-<<<<<<< HEAD
-from flask import render_template, redirect,request, flash
-=======
+
 from flask import render_template, redirect, request, flash, url_for
->>>>>>> develop
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
-<<<<<<< HEAD
+from sqlalchemy import or_
 import pymysql
 #import secrets
 import os
-
-#dbuser = os.environ.get('DBUSER')
-#dbpass = os.environ.get('DBPASS')
-#dbhost = os.environ.get('DBHOST')
-#dbname = os.environ.get('DBNAME')
-=======
-from sqlalchemy import or_
-import pymysql
-import secrets
-#import os
 
 dbuser = os.environ.get('DBUSER')
 dbpass = os.environ.get('DBPASS')
 dbhost = os.environ.get('DBHOST')
 dbname = os.environ.get('DBNAME')
->>>>>>> develop
 
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(dbuser, dbpass, dbhost, dbname)
 #conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(secrets.dbuser, secrets.dbpass, secrets.dbhost, secrets.dbname)
