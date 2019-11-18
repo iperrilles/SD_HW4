@@ -45,11 +45,28 @@ input{
 }
 
 .btn .btn-danger{
-	background-color: lightgray;
-	color: black;
+	background-color: teal;
+	color: White;
 }
 
 .btn .btn-danger:hover{
-	background-color: teal;
+	background-color: blue;
 	color: white;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  clear: right;
+}
+
+li {
+	float: left;
+  }
+  
+  a {
+	display: block;
+	padding: 8px;
+	background-color: #dddddd;
+  }
