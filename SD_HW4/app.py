@@ -2,7 +2,7 @@ from flask import Flask
 
 from flask import render_template, redirect, request, flash, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, SubmitField, IntegerField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
@@ -33,6 +33,7 @@ class iperrilles_landmarksapp(db.Model):
         return "id: {0} | Landmark Name: {1} | City: {2} | Country: {3}".format(self.LandmarkID, self.LandmarkName, self.City, self.Country)
 
 class LandmarksForm(FlaskForm):
+    LandmarkID = IntegerField('Landmark ID:')
     Landmark_Name = StringField('Landmark Name:', validators=[DataRequired()])
     City = StringField('City:', validators=[DataRequired()])
     Country = StringField('Country:', validators=[DataRequired()])
@@ -81,7 +82,25 @@ def delete_landmark(LandmarkID):
 def get_landmark(LandmarkID):
     if request.method == 'POST': 
         LM_obj = iperrilles_landmarksapp.query.get_or_404(LandmarkID)
-        return render_template('landmark.html', form=landmark, pageTitle='Landmark Details')
+        return render_template('landmark.html', form=landmark, pageTitle='Landmark Details', legend="Landmark Details")
+
+@app.route('/landmark/<int:friend_id>/update', methods=['GET','POST'])
+def update_landmark(friend_id):
+    LM_obj = iperrilles_landmarksapp.query.get_or_404(LandmarkID)
+    form = LandmarksForm()
+
+    if form.validate_on_submit():
+        LM_obj.Landmark_name = form.Landmark_Name.data
+        LM_obj.City = form.City.data
+        LM_obj.Country = form.Country.data
+        db.session.commit()
+        flash('Landmark has been updated.')
+        return redirect(url_for('get_landmark', LandmarkId=LM_obj.LandmarkID))
+
+    form.Landmark_Name.data = LM_obj.Landmark_Name
+    form.City.data = LM_obj.City
+    form.Country.data = LM_obj.Country
+    return render_template('update_landmark.html', form=form, pageTitle='Update Landmark', legend="Update Landmark")
 
 
 if __name__ == '__main__':
