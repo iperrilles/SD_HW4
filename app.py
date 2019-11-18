@@ -48,7 +48,7 @@ def add_Landmark():
 @app.route('/delete_landmark/<int:LandmarkID>', methods=['GET','POST'])
 def delete_landmark(LandmarkID):
     if request.method == 'POST': 
-        LM_obj = iperrilles_landmarksapp.query.filter_by(LandmarkID=LandmarkID).first()
+        LM_obj = iperrilles_landmarksapp.query.get_or_404(LandmarkID)
         db.session.delete(LM_obj)
         db.session.commit()
         flash('Landmark was successfully deleted!')
