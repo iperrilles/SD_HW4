@@ -7,6 +7,7 @@
     <form method="POST" action="">
 
         {{ form.csrf_token }}
+        {{ form.LandmarkID.label }} {{ form.LandmarkID}}
         {{ form.LandmarkName.label }} {{ form.LandmarkName}}
         {{ form.City.label }} {{ form.City}}
         {{ form.Country.label }} {{ form.Country}}
