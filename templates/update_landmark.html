@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+<h3><a href="{{ url_for('index')}}">Add Landmark</a></h3>
+
+<div>
+
+    <h2>Add a new Landmark</h2>
+   
+    <form method="POST" action="{{ url_for('add_Landmark') }}">
+
+        {{ form.csrf_token }}
+        {{ form.Landmark_Name.label }} {{ form.Landmark_Name(size=20) }}
+        {{ form.City.label }} {{ form.City(size=20) }}
+        {{ form.Country.label }} {{ form.Country(size=20) }}
+    
+        <input type="submit" value="Add Landmark">
+
+    </form>
+</div>
+{% endblock %}

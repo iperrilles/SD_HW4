@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block body %}
+<div>
+    <h3><a href="{{ url_for('index')}}">Home</a></h3>
+
+    {% if form % }
+    <form method="POST" action="">
+
+        {{ form.csrf_token }}
+        {{ form.LandmarkID.label }} {{ form.LandmarkID}}
+        {{ form.Landmark_Name.label }} {{ form.Landmark_Name}}
+        {{ form.City.label }} {{ form.City}}
+        {{ form.Country.label }} {{ form.Country}}
+    
+        <input type="submit" value="Update" formaction="{{url_for('update_landmark', LandmarkID=form.LandmarkID)}}">
+        <input type="submit" value="Delete" formaction="{{url_for('delete_landmark', LandmarkID=form.LandmarkID)}}">
+
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

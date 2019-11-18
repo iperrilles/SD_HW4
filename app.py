@@ -57,5 +57,11 @@ def delete_landmark(LandmarkID):
     else: 
         return redirect("/")
 
+@app.route('/landmark/<int:LandmarkID>', methods=['GET','POST'])
+def get_landmark(LandmarkID):
+    if request.method == 'POST': 
+        LM_obj = iperrilles_landmarksapp.query.get_or_404(LandmarkID)
+        return render_template('landmark.html', form=landmark, pageTitle='Landmark Details')
+
 if __name__ == '__main__':
     app.run(debug=True)
