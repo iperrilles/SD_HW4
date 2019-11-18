@@ -1,9 +1,14 @@
 from flask import Flask
+<<<<<<< HEAD
 from flask import render_template, redirect,request, flash
+=======
+from flask import render_template, redirect, request, flash, url_for
+>>>>>>> develop
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< HEAD
 import pymysql
 #import secrets
 import os
@@ -12,6 +17,17 @@ import os
 #dbpass = os.environ.get('DBPASS')
 #dbhost = os.environ.get('DBHOST')
 #dbname = os.environ.get('DBNAME')
+=======
+from sqlalchemy import or_
+import pymysql
+import secrets
+#import os
+
+dbuser = os.environ.get('DBUSER')
+dbpass = os.environ.get('DBPASS')
+dbhost = os.environ.get('DBHOST')
+dbname = os.environ.get('DBNAME')
+>>>>>>> develop
 
 conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(dbuser, dbpass, dbhost, dbname)
 #conn = "mysql+pymysql://{0}:{1}@{2}/{3}".format(secrets.dbuser, secrets.dbpass, secrets.dbhost, secrets.dbname)
@@ -35,6 +51,17 @@ class LandmarksForm(FlaskForm):
     City = StringField('City:', validators=[DataRequired()])
     Country = StringField('Country:', validators=[DataRequired()])
 
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        form = request.form
+        search_value = form['search_string']
+        search = "%{}%".format(search_value)
+        results = iperrilles_landmarksapp.query.filter(or_(iperrilles_landmarksapp.Landmark_Name.like(search), iperrilles_landmarksapp.City.like(search), iperrilles_landmarksapp.Country.like(search)).all()
+        return render_template('index.html', landmarks=results,pageTitle="Landmarks", legend="Search Results")
+    else:
+        return redirect('/')
 
 @app.route('/')
 def index():
